@@ -15,16 +15,28 @@ namespace LeanCloud.LiveQuery
     public static class AVLiveQueryExtensions
     {
         public static bool Open { get; internal set; }
+        public static string GetCurrentSessionToken(string sessionToken = "")
+        {
+            if (sessionToken == "")
+            {
+                if (AVUser.CurrentUser != null)
+                {
+                    sessionToken = AVUser.CurrentUser.SessionToken;
+                }
+            }
+            return sessionToken;
+        }
+
         public static Task<AVLiveQuery<T>> SubscribeAsync<T>(this AVQuery<T> query, string sessionToken = "", CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
         {
             AVLiveQuery<T> rtn = null;
-			if (sessionToken == "")
-			{
-				if (AVUser.CurrentUser != null)
-				{
-					sessionToken = AVUser.CurrentUser.SessionToken;
-				}
-			}
+            if (sessionToken == "")
+            {
+                if (AVUser.CurrentUser != null)
+                {
+                    sessionToken = AVUser.CurrentUser.SessionToken;
+                }
+            }
 
             return CreateAsync(query, sessionToken, cancellationToken).OnSuccess(_ =>
              {
@@ -102,6 +114,5 @@ namespace LeanCloud.LiveQuery
                 return rtn;
             });
         }
-
     }
 }

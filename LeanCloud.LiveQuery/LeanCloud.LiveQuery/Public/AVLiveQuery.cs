@@ -43,22 +43,36 @@ namespace LeanCloud.LiveQuery
                 { "query_id", QueryId },
             };
 
-            if (sessionToken == "")
-            {
-                if (AVUser.CurrentUser != null)
-                {
-                    sessionToken = AVUser.CurrentUser.SessionToken;
-                }
-            }
-            var command = new AVCommand("LiveQuery/subscribe",
+            AVLiveQueryExtensions.GetCurrentSessionToken(sessionToken);
+
+            var command = new AVCommand("LiveQuery/subscribe/ping",
                                       "POST",
                                       sessionToken: sessionToken,
                                       data: strs);
 
             return AVPlugins.Instance.CommandRunner.RunCommandAsync(command).OnSuccess(t =>
             {
-                return t.Result.Item1 == System.Net.HttpStatusCode.NotFound;
+                return t.Result.Item1 != System.Net.HttpStatusCode.NotFound;
             });
+        }
+
+        public Task<bool> Unsubscribe(string sessionToken = "")
+        {
+			Dictionary<string, object> strs = new Dictionary<string, object>()
+			{
+				{ "id", Id },
+				{ "query_id", QueryId },
+			};
+            AVLiveQueryExtensions.GetCurrentSessionToken(sessionToken);
+			var command = new AVCommand("LiveQuery/unsubscribe/" + Id,
+						  "POST",
+						  sessionToken: sessionToken,
+						  data: strs);
+
+			return AVPlugins.Instance.CommandRunner.RunCommandAsync(command).OnSuccess(t =>
+			{
+				return t.Result.Item1 != System.Net.HttpStatusCode.NotFound;
+			});
         }
 
         public void Emit(string scope, IDictionary<string, object> payloadMap)
