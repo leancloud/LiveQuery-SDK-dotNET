@@ -30,13 +30,7 @@ namespace LeanCloud.LiveQuery
         public static Task<AVLiveQuery<T>> SubscribeAsync<T>(this AVQuery<T> query, string sessionToken = "", CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
         {
             AVLiveQuery<T> rtn = null;
-            if (sessionToken == "")
-            {
-                if (AVUser.CurrentUser != null)
-                {
-                    sessionToken = AVUser.CurrentUser.SessionToken;
-                }
-            }
+            GetCurrentSessionToken(sessionToken);
 
             return CreateAsync(query, sessionToken, cancellationToken).OnSuccess(_ =>
              {
@@ -46,15 +40,20 @@ namespace LeanCloud.LiveQuery
                  if (AVRealtime.Instance == null) throw new NullReferenceException("before subscribe live query, plaese call new AVRealtime(config) to initalize Realtime module.");
                  return AVRealtime.Instance.OpenAsync().OnSuccess(t =>
                  {
-                     var liveQueryLogInCmd = new AVIMCommand()
-                        .Option("login")
+                     AVRealtime.Instance.ToggleNotification(true);
+                     var liveQueryLogInCmd = new AVIMCommand().Command("login")
                         .Argument("installationId", rtn.Id)
                         .Argument("service", 1);
 
                      return AVRealtime.AVIMCommandRunner.RunCommandAsync(liveQueryLogInCmd);
                  }).Unwrap().OnSuccess(s =>
                  {
+                     if (s.Result.Item1 > 0)
+                     {
+                         AVRealtime.PrintLog("error on login to LiveQuery");
+                     }
                      Open = true;
+                    
                      AVRealtime.Instance.NoticeReceived += (sender, e) =>
                      {
                          if (e.CommandName == "data")
@@ -90,10 +89,14 @@ namespace LeanCloud.LiveQuery
 
         public static Task<AVLiveQuery<T>> CreateAsync<T>(this AVQuery<T> query, string sessionToken = "", CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
         {
+            var queryMap = new Dictionary<string, object>()
+            {
+                { "where",query.Condition},
+                { "className",query.GetClassName<T>()}
+            };
             Dictionary<string, object> strs = new Dictionary<string, object>()
             {
-                { "where", query.Condition },
-                { "className", query.GetClassName<T>() },
+                { "query",queryMap },
                 { "sessionToken", sessionToken }
             };
 
