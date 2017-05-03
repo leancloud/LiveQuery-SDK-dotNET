@@ -15,16 +15,23 @@ namespace LeanCloud.LiveQuery
     public static class AVLiveQueryExtensions
     {
         public static bool Open { get; internal set; }
-        public static Task<AVLiveQuery<T>> SubscribeAsync<T>(this AVQuery<T> query, string sessionToken, CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
+        public static Task<AVLiveQuery<T>> SubscribeAsync<T>(this AVQuery<T> query, string sessionToken = "", CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
         {
             AVLiveQuery<T> rtn = null;
+			if (sessionToken == "")
+			{
+				if (AVUser.CurrentUser != null)
+				{
+					sessionToken = AVUser.CurrentUser.SessionToken;
+				}
+			}
 
             return CreateAsync(query, sessionToken, cancellationToken).OnSuccess(_ =>
              {
                  rtn = _.Result;
                  if (Open) return Task.FromResult(rtn);
 
-                 if (AVRealtime.Instance == null) throw new NullReferenceException("before subscribe live query, plaese call AVRealtime(config) to initalize Realtime module.");
+                 if (AVRealtime.Instance == null) throw new NullReferenceException("before subscribe live query, plaese call new AVRealtime(config) to initalize Realtime module.");
                  return AVRealtime.Instance.OpenAsync().OnSuccess(t =>
                  {
                      var liveQueryLogInCmd = new AVIMCommand()
@@ -69,7 +76,7 @@ namespace LeanCloud.LiveQuery
              }).Unwrap();
         }
 
-        public static Task<AVLiveQuery<T>> CreateAsync<T>(this AVQuery<T> query, string sessionToken, CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
+        public static Task<AVLiveQuery<T>> CreateAsync<T>(this AVQuery<T> query, string sessionToken = "", CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
         {
             Dictionary<string, object> strs = new Dictionary<string, object>()
             {
