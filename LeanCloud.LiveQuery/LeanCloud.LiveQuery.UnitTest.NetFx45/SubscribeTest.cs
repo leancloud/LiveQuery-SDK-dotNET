@@ -82,10 +82,5 @@ namespace LeanCloud.LiveQuery.UnitTest.NetFx45
             Assert.IsTrue(e.Scope == "create");
             Assert.IsNotNull(e.Payload.ObjectId);
         }
-
-        private void LqInstance_OnLiveQueryReceived(object sender, AVLiveQueryEventArgs<AVObject> e)
-        {
-
-        }
     }
 }
