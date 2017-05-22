@@ -36,10 +36,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="LeanCloud.Realtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LeanCloud.Realtime.2017.5.3.1\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Realtime.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Net.Http">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\portable-net40+sl4+win8+wp71+wpa81\System.Net.Http.dll</HintPath>
     </Reference>
@@ -58,11 +54,14 @@
     <Reference Include="WebSockets.PCL">
       <HintPath>..\packages\Websockets.Pcl.1.1.9\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10\WebSockets.PCL.dll</HintPath>
     </Reference>
+    <Reference Include="LeanCloud.Realtime">
+      <HintPath>..\packages\LeanCloud.Realtime.2017.5.9.3\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Realtime.dll</HintPath>
+    </Reference>
     <Reference Include="LeanCloud.Core">
-      <HintPath>..\packages\LeanCloud.Storage.2017.4.29.2\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Core.dll</HintPath>
+      <HintPath>..\packages\LeanCloud.Storage.2017.5.16.5\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Core.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.Storage">
-      <HintPath>..\packages\LeanCloud.Storage.2017.4.29.2\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Storage.dll</HintPath>
+      <HintPath>..\packages\LeanCloud.Storage.2017.5.16.5\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Storage.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup />
