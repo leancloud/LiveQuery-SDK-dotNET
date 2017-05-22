@@ -31,7 +31,7 @@
     <DocumentationFile>bin\Debug\Unity\LeanCloud.LiveQuery.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType></DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\LeanCloud.LiveQuery\bin\Release\Unity</OutputPath>
     <DefineConstants>TRACE;UNITY</DefineConstants>
