@@ -27,6 +27,7 @@ namespace LeanCloud.LiveQuery
             }
             return sessionToken;
         }
+
         public static Task<AVLiveQuery<T>> CreateAsync<T>(AVQuery<T> query, string subscriptionId = "", string sessionToken = "", CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
         {
             var queryMap = new Dictionary<string, object>()
