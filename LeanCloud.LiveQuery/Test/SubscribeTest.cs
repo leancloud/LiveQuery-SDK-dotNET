@@ -41,20 +41,6 @@ namespace LeanCloud.LiveQuery.UnitTest.NetFx45
                  return Task.FromResult(0);
              });
         }
-        [Test]
-        public Task TestCreate()
-        {
-            var query = new AVQuery<AVObject>("TodoLiveQuery").WhereEqualTo("name", "livequery");
-
-            return query.CreateAsync<AVObject>().ContinueWith(t =>
-            {
-                var lqInstance = t.Result;
-                lqInstance.OnLiveQueryReceived += LqInstance_OnLiveQueryReceived;
-            }).ContinueWith(s =>
-            {
-                return Task.FromResult(0);
-            });
-        }
 
         [Test, Timeout(300000)]
         public Task TestSubscribe()

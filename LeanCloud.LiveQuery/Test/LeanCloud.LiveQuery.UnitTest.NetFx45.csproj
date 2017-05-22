@@ -103,7 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LeanCloud.LiveQuery\LeanCloud.LiveQuery.csproj">
+    <ProjectReference Include="..\LeanCloud.LiveQuery.Portable.csproj">
       <Project>{f3eb1da8-afb0-4342-8524-1a9b091eb9c0}</Project>
       <Name>LeanCloud.LiveQuery</Name>
     </ProjectReference>
