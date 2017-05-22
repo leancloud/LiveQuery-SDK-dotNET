@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package 
+    xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>LeanCloud.LiveQuery</id>
+        <version>0.0.0.0</version>
+        <authors>LeanCloud</authors>
+        <owners>LeanCloud</owners>
+        <licenseUrl>https://leancloud.cn/terms.html</licenseUrl>
+        <projectUrl>http://www.leancloud.cn</projectUrl>
+        <iconUrl>https://leancloud.cn/images/static/press/Logo%20-%20Avatar.png</iconUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>The official LeanCloud LiveQuery SDK for .NET 4.5 or later.Support Windows Classic Desktop(WinForms &amp; WPF) &amp; Windows Mobile &amp; Xamarin iOS &amp; Xamarin Android &amp; Xamarin Forms.</description>
+        <copyright>Copyright © LeanCloud 2012 - 2017</copyright>
+        <language>en-US</language>
+        <tags>LeanCloud paas baas storage realtime websocket message im cloud</tags>
+        <dependencies>
+            <dependency id="LeanCloud.Storage" version="2017.5.16.5" />
+            <dependency id="LeanCloud.Realtime" version="2017.5.9.3"/>
+        </dependencies>
+    </metadata>
+    <files>
+        <!--.NET45 -->
+        <file src="LeanCloud.LiveQuery\bin\Release\LeanCloud.LiveQuery.dll" target="lib\net45"/>
+        <file src="LeanCloud.LiveQuery\bin\Release\LeanCloud.LiveQuery.xml" target="lib\net45"/>
+        <!--UWP -->
+        <file src="LeanCloud.LiveQuery\bin\Release\LeanCloud.LiveQuery.dll" target="lib\uap10.0"/>
+        <file src="LeanCloud.LiveQuery\bin\Release\LeanCloud.LiveQuery.xml" target="lib\uap10.0"/>
+        <!--Porable -->
+        <file src="LeanCloud.LiveQuery\bin\Release\LeanCloud.LiveQuery.dll" target="lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10"/>
+        <file src="LeanCloud.LiveQuery\bin\Release\LeanCloud.LiveQuery.xml" target="lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10"/>
+    </files>
+</package>

@@ -43,26 +43,29 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="AssemblyLister">
+      <HintPath>Unity.libs\AssemblyLister.dll</HintPath>
+    </Reference>
     <Reference Include="LeanCloud.Core">
-      <HintPath>..\Unity.libs\LeanCloud.Core.dll</HintPath>
+      <HintPath>Unity.libs\LeanCloud.Core.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.Realtime">
-      <HintPath>..\Unity.libs\LeanCloud.Realtime.dll</HintPath>
+      <HintPath>Unity.libs\LeanCloud.Realtime.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.Storage">
-      <HintPath>..\Unity.libs\LeanCloud.Storage.dll</HintPath>
+      <HintPath>Unity.libs\LeanCloud.Storage.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Compat">
-      <HintPath>..\Unity.libs\Unity.Compat.dll</HintPath>
+      <HintPath>Unity.libs\Unity.Compat.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Tasks">
-      <HintPath>..\Unity.libs\Unity.Tasks.dll</HintPath>
+      <HintPath>Unity.libs\Unity.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\Unity.libs\UnityEngine.dll</HintPath>
+      <HintPath>Unity.libs\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>..\Unity.libs\websocket-sharp.dll</HintPath>
+      <HintPath>Unity.libs\websocket-sharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
