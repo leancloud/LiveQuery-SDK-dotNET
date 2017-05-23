@@ -62,7 +62,7 @@
       <HintPath>..\..\packages\LeanCloud.Realtime.2017.5.9.3\lib\net45\LeanCloud.Realtime.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.LiveQuery">
-      <HintPath>..\..\packages\LeanCloud.LiveQuery.0.0.0.0\lib\net45\LeanCloud.LiveQuery.dll</HintPath>
+      <HintPath>..\..\packages\LeanCloud.LiveQuery.2017.5.23.1\lib\net45\LeanCloud.LiveQuery.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
