@@ -186,9 +186,22 @@ namespace LeanCloud.LiveQuery
                                 foreach (var payload in matchedPayloads)
                                 {
                                     var scope = payload["op"].ToString();
-                                    var payloadMap = payload["object"] as Dictionary<string, object>;
+
+                                    Dictionary<string, object> payloadMap = null;
+                                    if (payload.ContainsKey("object"))
+                                        payloadMap = payload["object"] as Dictionary<string, object>;
+
+                                    string[] keys = null;
+                                    if (payload.ContainsKey("updatedKeys"))
+                                    {
+                                        var keyObjs = payload["updatedKeys"] as List<object>;
+                                        if (keyObjs != null)
+                                        {
+                                            keys = keyObjs.Select(item => item.ToString()).ToArray();
+                                        }
+                                    }
                                     // emit it to livequery instance.
-                                    this.Emit(scope, payloadMap);
+                                    this.Emit(scope, keys, payloadMap);
                                 }
                             }
                         }
@@ -254,13 +267,14 @@ namespace LeanCloud.LiveQuery
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="payloadMap"></param>
-        public void Emit(string scope, IDictionary<string, object> payloadMap)
+        public void Emit(string scope, string[] keys, IDictionary<string, object> payloadMap)
         {
             var objectState = AVObjectCoder.Instance.Decode(payloadMap, AVDecoder.Instance);
             var payloadObject = AVObject.FromState<T>(objectState, Query.GetClassName<T>());
             var args = new AVLiveQueryEventArgs<T>()
             {
                 Scope = scope,
+                Keys = keys,
                 Payload = payloadObject
             };
             OnLiveQueryReceived.Invoke(this, args);

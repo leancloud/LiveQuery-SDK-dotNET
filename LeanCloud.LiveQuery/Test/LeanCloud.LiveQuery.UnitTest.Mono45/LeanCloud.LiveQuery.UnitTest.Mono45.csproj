@@ -29,6 +29,41 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="PCLStorage.Abstractions">
+      <HintPath>..\..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage">
+      <HintPath>..\..\packages\PCLStorage.1.0.2\lib\net45\PCLStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="AssemblyLister">
+      <HintPath>..\..\packages\LeanCloud.Storage.2017.5.16.5\lib\net45\AssemblyLister.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.Core">
+      <HintPath>..\..\packages\LeanCloud.Storage.2017.5.16.5\lib\net45\LeanCloud.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.Storage">
+      <HintPath>..\..\packages\LeanCloud.Storage.2017.5.16.5\lib\net45\LeanCloud.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Websockets.Net">
+      <HintPath>..\..\packages\Websockets.Pcl.1.1.9\lib\net45\Websockets.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSockets.PCL">
+      <HintPath>..\..\packages\Websockets.Pcl.1.1.9\lib\net45\WebSockets.PCL.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.Realtime">
+      <HintPath>..\..\packages\LeanCloud.Realtime.2017.5.9.3\lib\net45\LeanCloud.Realtime.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.LiveQuery">
+      <HintPath>..\..\packages\LeanCloud.LiveQuery.0.0.0.0\lib\net45\LeanCloud.LiveQuery.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Test.cs" />
