@@ -20,26 +20,16 @@ namespace LeanCloud.LiveQuery.UnitTest.NetFx45
         {
             string appId = ConfigurationManager.AppSettings["appId"];
             string appKey = ConfigurationManager.AppSettings["appKey"];
+
             Websockets.Net.WebsocketConnection.Link();
             var realtime = new AVRealtime(appId, appKey);
             AVRealtime.WebSocketLog(Console.WriteLine);
-            AVClient.HttpLog(Console.WriteLine);
-        }
 
-        [Test]
-        public Task TestRealtime()
-        {
-            return AVRealtime.Instance.CreateClient("junwu").ContinueWith(t =>
-             {
-                 var client = t.Result;
-                 var conversation = AVIMConversation.CreateWithoutData("58be1f5392509726c3dc1c8b", client);
-                 return client.SendMessageAsync(conversation, new AVIMTextMessage("hehe"), receipt: false);
-             }).Unwrap().ContinueWith(m =>
-             {
-                 var message = m.Result;
-                 Assert.IsNotNull(message.Id);
-                 return Task.FromResult(0);
-             });
+            AVClient.Initialize(appId, appKey);
+            AVClient.HttpLog(Console.WriteLine);
+
+            //需要为 LiveQuery 指定一个 AVRealtime 实例用来接收来自云端的推送
+            AVLiveQuery.Channel = realtime;
         }
 
         [Test, Timeout(300000)]
