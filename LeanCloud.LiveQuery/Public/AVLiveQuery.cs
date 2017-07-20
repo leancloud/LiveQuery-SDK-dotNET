@@ -12,6 +12,21 @@ using System.Linq.Expressions;
 
 namespace LeanCloud.LiveQuery
 {
+
+    public static class AVLiveQuery
+    {
+        /// <summary>
+        /// LiveQuery 传输数据的 AVRealtime 实例
+        /// </summary>
+        public static AVRealtime Channel
+        {
+            get; set;
+        }
+    }
+    /// <summary>
+    /// AVLiveQuery 对象
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class AVLiveQuery<T> where T : AVObject
     {
         public static bool Opend { get; internal set; }
@@ -28,6 +43,15 @@ namespace LeanCloud.LiveQuery
             return sessionToken;
         }
 
+        /// <summary>
+        /// 创建
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <param name="subscriptionId"></param>
+        /// <param name="sessionToken"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static Task<AVLiveQuery<T>> CreateAsync<T>(AVQuery<T> query, string subscriptionId = "", string sessionToken = "", CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
         {
             var queryMap = new Dictionary<string, object>()
@@ -60,22 +84,42 @@ namespace LeanCloud.LiveQuery
                 return rtn;
             });
         }
+
+        /// <summary>
+        /// 当前 AVLiveQuery 对象的 Id
+        /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        /// LiveQuery 对应的 QueryId
+        /// </summary>
         public string QueryId { get; set; }
 
+        /// <summary>
+        /// 根据 id 创建 AVLiveQuery 对象
+        /// </summary>
+        /// <param name="id"></param>
         public AVLiveQuery(string id)
         {
             Id = id;
         }
 
+        /// <summary>
+        /// 根据 AVQuery 创建 AVLiveQuery 对象
+        /// </summary>
+        /// <param name="query"></param>
         public AVLiveQuery(AVQuery<T> query)
         {
             this.Query = query;
         }
-
+        /// <summary>
+        /// AVLiveQuery 对应的 AVQuery 对象
+        /// </summary>
         public AVQuery<T> Query { get; set; }
 
+        /// <summary>
+        /// 数据推送的触发的事件通知
+        /// </summary>
         public event EventHandler<AVLiveQueryEventArgs<T>> OnLiveQueryReceived;
 
         /// <summary>
@@ -103,6 +147,12 @@ namespace LeanCloud.LiveQuery
             };
         }
 
+        /// <summary>
+        /// 订阅操作
+        /// </summary>
+        /// <param name="sessionToken"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task SubscribeAsync(string sessionToken = "", CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.Query == null) throw new Exception("Query can not be null when subcribe.");
@@ -126,7 +176,7 @@ namespace LeanCloud.LiveQuery
                      }
                      if (AVRealtime.Instance == null) throw new NullReferenceException("before subscribe live query, plaese call new AVRealtime(config) to initalize Realtime module.");
                      // open the websocket with LeanCloud Realtime cloud service.
-                     return AVRealtime.Instance.OpenAsync();
+                     return AVLiveQuery.Channel.OpenAsync();
                  }
 
              }).Unwrap().OnSuccess(openT =>
@@ -134,12 +184,12 @@ namespace LeanCloud.LiveQuery
                  lock (mutex)
                  {
                      if (Opend) return Task.FromResult(new Tuple<int, IDictionary<string, object>>(0, null));
-                     AVRealtime.Instance.ToggleNotification(true);
+                     AVLiveQuery.Channel.ToggleNotification(true);
                      var liveQueryLogInCmd = new AVIMCommand().Command("login")
                               .Argument("installationId", this.Id)
                               .Argument("service", 1);
                      // open the session for LiveQuery.
-                     return AVRealtime.AVIMCommandRunner.RunCommandAsync(liveQueryLogInCmd);
+                     return AVLiveQuery.Channel.AVIMCommandRunner.RunCommandAsync(liveQueryLogInCmd);
                  }
              }).Unwrap().OnSuccess(runT =>
              {
@@ -163,51 +213,51 @@ namespace LeanCloud.LiveQuery
             if (!this.NoticeSwitch) return;
             if (registed) return;
 
-            AVRealtime.Instance.NoticeReceived += (sender, e) =>
-            {
-                if (e.CommandName == "data")
-                {
-                    if (NoticeSwitch)
-                    {
-                        var ids = AVDecoder.Instance.DecodeList<string>(e.RawData["ids"]);
-                        var msg = e.RawData["msg"] as IEnumerable<object>;
-                        if (msg != null)
-                        {
-                            var receivedPayloads = from item in msg
-                                                   select item as Dictionary<string, object>;
-                            if (receivedPayloads != null)
-                            {
-                                var matchedPayloads = receivedPayloads.Where(item =>
-                                {
-                                    if (!item.ContainsKey("query_id")) return false;
-                                    var query_id = item["query_id"].ToString();
-                                    return query_id == this.QueryId;
-                                });
-                                foreach (var payload in matchedPayloads)
-                                {
-                                    var scope = payload["op"].ToString();
+            AVLiveQuery.Channel.NoticeReceived += (sender, e) =>
+             {
+                 if (e.CommandName == "data")
+                 {
+                     if (NoticeSwitch)
+                     {
+                         var ids = AVDecoder.Instance.DecodeList<string>(e.RawData["ids"]);
+                         var msg = e.RawData["msg"] as IEnumerable<object>;
+                         if (msg != null)
+                         {
+                             var receivedPayloads = from item in msg
+                                                    select item as Dictionary<string, object>;
+                             if (receivedPayloads != null)
+                             {
+                                 var matchedPayloads = receivedPayloads.Where(item =>
+                                 {
+                                     if (!item.ContainsKey("query_id")) return false;
+                                     var query_id = item["query_id"].ToString();
+                                     return query_id == this.QueryId;
+                                 });
+                                 foreach (var payload in matchedPayloads)
+                                 {
+                                     var scope = payload["op"].ToString();
 
-                                    Dictionary<string, object> payloadMap = null;
-                                    if (payload.ContainsKey("object"))
-                                        payloadMap = payload["object"] as Dictionary<string, object>;
+                                     Dictionary<string, object> payloadMap = null;
+                                     if (payload.ContainsKey("object"))
+                                         payloadMap = payload["object"] as Dictionary<string, object>;
 
-                                    string[] keys = null;
-                                    if (payload.ContainsKey("updatedKeys"))
-                                    {
-                                        var keyObjs = payload["updatedKeys"] as List<object>;
-                                        if (keyObjs != null)
-                                        {
-                                            keys = keyObjs.Select(item => item.ToString()).ToArray();
-                                        }
-                                    }
-                                    // emit it to livequery instance.
-                                    this.Emit(scope, keys, payloadMap);
-                                }
-                            }
-                        }
-                    }
-                }
-            };
+                                     string[] keys = null;
+                                     if (payload.ContainsKey("updatedKeys"))
+                                     {
+                                         var keyObjs = payload["updatedKeys"] as List<object>;
+                                         if (keyObjs != null)
+                                         {
+                                             keys = keyObjs.Select(item => item.ToString()).ToArray();
+                                         }
+                                     }
+                                     // emit it to livequery instance.
+                                     this.Emit(scope, keys, payloadMap);
+                                 }
+                             }
+                         }
+                     }
+                 }
+             };
 
             registed = true;
         }

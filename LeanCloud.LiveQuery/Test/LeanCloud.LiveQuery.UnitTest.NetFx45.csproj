@@ -38,19 +38,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AssemblyLister, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LeanCloud.Storage.2017.4.29.2\lib\net45\AssemblyLister.dll</HintPath>
+      <HintPath>..\packages\LeanCloud.Storage.2017.5.16.5\lib\net45\AssemblyLister.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LeanCloud.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LeanCloud.Storage.2017.4.29.2\lib\net45\LeanCloud.Core.dll</HintPath>
+      <HintPath>..\packages\LeanCloud.Storage.2017.5.16.5\lib\net45\LeanCloud.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LeanCloud.Realtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LeanCloud.Realtime.2017.5.3.1\lib\net45\LeanCloud.Realtime.dll</HintPath>
+      <HintPath>..\packages\LeanCloud.Realtime.2017.6.26.1\lib\net45\LeanCloud.Realtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LeanCloud.Storage, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LeanCloud.Storage.2017.4.29.2\lib\net45\LeanCloud.Storage.dll</HintPath>
+      <HintPath>..\packages\LeanCloud.Storage.2017.5.16.5\lib\net45\LeanCloud.Storage.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
@@ -103,14 +103,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LeanCloud.LiveQuery.Portable.csproj">
-      <Project>{f3eb1da8-afb0-4342-8524-1a9b091eb9c0}</Project>
-      <Name>LeanCloud.LiveQuery</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LeanCloud.LiveQuery.Portable.csproj">
+      <Project>{f3eb1da8-afb0-4342-8524-1a9b091eb9c0}</Project>
+      <Name>LeanCloud.LiveQuery.Portable</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
