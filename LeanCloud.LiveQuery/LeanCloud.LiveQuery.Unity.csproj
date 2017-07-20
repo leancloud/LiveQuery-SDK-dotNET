@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -31,7 +31,8 @@
     <DocumentationFile>bin\Debug\Unity\LeanCloud.LiveQuery.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
+    <DebugType>
+    </DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\LeanCloud.LiveQuery\bin\Release\Unity</OutputPath>
     <DefineConstants>TRACE;UNITY</DefineConstants>
@@ -41,6 +42,10 @@
     <DocumentationFile>bin\Release\Unity\LeanCloud.LiveQuery.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LeanCloud.Realtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Unity.libs\LeanCloud.Realtime.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="AssemblyLister">
@@ -48,9 +53,6 @@
     </Reference>
     <Reference Include="LeanCloud.Core">
       <HintPath>Unity.libs\LeanCloud.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="LeanCloud.Realtime">
-      <HintPath>Unity.libs\LeanCloud.Realtime.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.Storage">
       <HintPath>Unity.libs\LeanCloud.Storage.dll</HintPath>
@@ -79,6 +81,21 @@
     <Compile Include="..\LeanCloud.LiveQuery\Public\AVLiveQueryExtensions.cs">
       <Link>Public\AVLiveQueryExtensions.cs</Link>
     </Compile>
+    <Compile Include="Public\AVLiveQuery.cs" />
+    <Compile Include="Public\AVLiveQueryEventArgs.cs" />
+    <Compile Include="Public\AVLiveQueryExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Unity.libs\AssemblyLister.dll" />
+    <Content Include="Unity.libs\LeanCloud.Core.dll" />
+    <Content Include="Unity.libs\LeanCloud.Realtime.dll" />
+    <Content Include="Unity.libs\LeanCloud.Storage.dll" />
+    <Content Include="Unity.libs\link.xml" />
+    <Content Include="Unity.libs\Unity.Compat.dll" />
+    <Content Include="Unity.libs\Unity.Tasks.dll" />
+    <Content Include="Unity.libs\UnityEngine.dll" />
+    <Content Include="Unity.libs\websocket-sharp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
