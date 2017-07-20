@@ -21,14 +21,16 @@ namespace LeanCloud.LiveQuery.UnitTest.NetFx45
             string appId = ConfigurationManager.AppSettings["appId"];
             string appKey = ConfigurationManager.AppSettings["appKey"];
 
+            // 初始化存储模块
+            AVClient.Initialize(appId, appKey);
+            AVClient.HttpLog(Console.WriteLine);
+
+            // 初始化聊天模块
             Websockets.Net.WebsocketConnection.Link();
             var realtime = new AVRealtime(appId, appKey);
             AVRealtime.WebSocketLog(Console.WriteLine);
 
-            AVClient.Initialize(appId, appKey);
-            AVClient.HttpLog(Console.WriteLine);
-
-            //需要为 LiveQuery 指定一个 AVRealtime 实例用来接收来自云端的推送
+            // 需要为 LiveQuery 指定一个 AVRealtime 实例用来接收来自云端的推送
             AVLiveQuery.Channel = realtime;
         }
 
