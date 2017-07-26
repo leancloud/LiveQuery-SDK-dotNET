@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.LiveQuery.Unity",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.LiveQuery.UnitTest.Mono45", "Test\LeanCloud.LiveQuery.UnitTest.Mono45\LeanCloud.LiveQuery.UnitTest.Mono45.csproj", "{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveQuery.ConsoleApplication.Demo", "..\LiveQuery.ConsoleApplication.Demo\LiveQuery.ConsoleApplication.Demo.csproj", "{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
