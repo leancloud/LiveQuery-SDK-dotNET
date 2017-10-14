@@ -15,8 +15,8 @@
         <language>en-US</language>
         <tags>LeanCloud paas baas storage realtime websocket message im cloud</tags>
         <dependencies>
-            <dependency id="LeanCloud.Storage" version="2017.5.16.5" />
-            <dependency id="LeanCloud.Realtime" version="2017.6.26.1"/>
+            <dependency id="LeanCloud.Storage" version="2017.10.13.1" />
+            <dependency id="LeanCloud.Realtime" version="2017.9.22.1"/>
         </dependencies>
     </metadata>
     <files>
