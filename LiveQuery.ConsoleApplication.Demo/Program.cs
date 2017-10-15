@@ -12,6 +12,9 @@ namespace LiveQuery.ConsoleApplication.Demo
 {
     class Program
     {
+
+
+
         static void Main(string[] args)
         {
             string appId = ConfigurationManager.AppSettings["appId"];
@@ -45,10 +48,18 @@ namespace LiveQuery.ConsoleApplication.Demo
             {
                 return Task.Delay(200000);
             }).Unwrap();
-
+            //SaveAnObject();
             Console.ReadKey();
         }
-
+        static void SaveAnObject()
+        {
+            var todo = new AVObject("Todo");
+            todo["title"] = "fuck csharp";
+            todo.SaveAsync().ContinueWith(t => 
+            {
+                Console.WriteLine(todo.ObjectId);
+            });
+        }
         private static void LivequeryInstance_OnLiveQueryReceived(object sender, AVLiveQueryEventArgs<AVObject> e)
         {
             Console.WriteLine(e.Scope == "create");

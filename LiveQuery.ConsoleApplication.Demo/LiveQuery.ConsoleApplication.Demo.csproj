@@ -34,15 +34,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AssemblyLister, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\LeanCloud.LiveQuery\packages\LeanCloud.Storage.2017.10.13.1\lib\net45\AssemblyLister.dll</HintPath>
+      <HintPath>..\LeanCloud.LiveQuery\packages\LeanCloud.Storage.2017.10.15.1\lib\net45\AssemblyLister.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LeanCloud.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\LeanCloud.LiveQuery\packages\LeanCloud.Storage.2017.10.13.1\lib\net45\LeanCloud.Core.dll</HintPath>
+      <HintPath>..\LeanCloud.LiveQuery\packages\LeanCloud.Storage.2017.10.15.1\lib\net45\LeanCloud.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="LeanCloud.LiveQuery, Version=1.0.6496.16967, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\LeanCloud.LiveQuery\packages\LeanCloud.LiveQuery.2017.10.14.1\lib\net45\LeanCloud.LiveQuery.dll</HintPath>
+    <Reference Include="LeanCloud.LiveQuery, Version=1.0.6497.8396, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\LeanCloud.LiveQuery\packages\LeanCloud.LiveQuery.2017.10.15.1\lib\net45\LeanCloud.LiveQuery.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LeanCloud.Realtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -50,7 +50,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="LeanCloud.Storage, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\LeanCloud.LiveQuery\packages\LeanCloud.Storage.2017.10.13.1\lib\net45\LeanCloud.Storage.dll</HintPath>
+      <HintPath>..\LeanCloud.LiveQuery\packages\LeanCloud.Storage.2017.10.15.1\lib\net45\LeanCloud.Storage.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PCLStorage, Version=1.0.2.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
