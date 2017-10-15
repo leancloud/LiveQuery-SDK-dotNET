@@ -9,12 +9,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using LeanCloud.Realtime;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace LeanCloud.LiveQuery.UnitTest.NetFx45
 {
     [TestFixture]
     public class SubscribeTest
     {
+        public void LogText(string message)
+        {
+            Trace.WriteLine(message);
+        }
         [SetUp]
         public void initApp()
         {
@@ -23,12 +28,12 @@ namespace LeanCloud.LiveQuery.UnitTest.NetFx45
 
             // 初始化存储模块
             AVClient.Initialize(appId, appKey);
-            AVClient.HttpLog(Console.WriteLine);
+            AVClient.HttpLog(LogText);
 
             // 初始化聊天模块
             Websockets.Net.WebsocketConnection.Link();
             var realtime = new AVRealtime(appId, appKey);
-            AVRealtime.WebSocketLog(Console.WriteLine);
+            AVRealtime.WebSocketLog(LogText);
 
             // 需要为 LiveQuery 指定一个 AVRealtime 实例用来接收来自云端的推送
             AVLiveQuery.Channel = realtime;

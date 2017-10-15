@@ -170,11 +170,11 @@ namespace LeanCloud.LiveQuery
                  {
                      this.Id = subcriptionT.Result.Id;
                      this.QueryId = subcriptionT.Result.QueryId;
-                     if (AVRealtime.Instance.State == AVRealtime.Status.Online)
+                     if (AVLiveQuery.Channel.State == AVRealtime.Status.Online)
                      {
                          return Task.FromResult(0);
                      }
-                     if (AVRealtime.Instance == null) throw new NullReferenceException("before subscribe live query, plaese call new AVRealtime(config) to initalize Realtime module.");
+                     if (AVLiveQuery.Channel == null) throw new NullReferenceException("before subscribe live query, plaese call new AVRealtime(config) and set it as AVLiveQuery.Channel.");
                      // open the websocket with LeanCloud Realtime cloud service.
                      return AVLiveQuery.Channel.OpenAsync();
                  }

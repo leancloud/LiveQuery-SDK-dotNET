@@ -29,7 +29,6 @@ namespace LiveQuery.ConsoleApplication.Demo
             // 需要为 LiveQuery 指定一个 AVRealtime 实例用来接收来自云端的推送
             AVLiveQuery.Channel = realtime;
 
-
             var query = new AVQuery<AVObject>("TodoLiveQuery").WhereEqualTo("name", "livequery");
 
             query.SubscribeAsync().ContinueWith(t =>
