@@ -1,5 +1,9 @@
 # LeanCloud LiveQuery for C#
 
+## 官方文档
+
+[实时数据同步 LiveQuery 开发指南](https://leancloud.cn/docs/livequery-guide.html)
+
 ## 初始化
 
 ```cs
