@@ -15,6 +15,7 @@ namespace LeanCloud.LiveQuery
 
     public static class AVLiveQuery
     {
+
         /// <summary>
         /// LiveQuery 传输数据的 AVRealtime 实例
         /// </summary>
@@ -72,7 +73,7 @@ namespace LeanCloud.LiveQuery
                                         sessionToken: sessionToken,
                                         data: strs);
 
-            return AVPlugins.Instance.CommandRunner.RunCommandAsync(command).OnSuccess(t =>
+            return AVPlugins.Instance.CommandRunner.RunCommandAsync(command).ContinueWith(t =>
             {
                 subscriptionId = t.Result.Item2["id"] as string;
                 var queryId = t.Result.Item2["query_id"] as string;
@@ -161,48 +162,50 @@ namespace LeanCloud.LiveQuery
             // get installation id as the LiveQuery subscription id.
             return AVPlugins.Instance.InstallationIdController.GetAsync().OnSuccess(insT =>
              {
+
                  var subscriptionId = insT.Result.ToString();
                  // create LiveQuery subscription with an id.
                  return CreateAsync(this.Query, subscriptionId, sessionToken, cancellationToken);
+
              }).Unwrap().OnSuccess(subcriptionT =>
              {
-                 lock (mutex)
+                 this.Id = subcriptionT.Result.Id;
+                 this.QueryId = subcriptionT.Result.QueryId;
+
+                 if (AVLiveQuery.Channel == null) throw new NullReferenceException("before subscribe live query, plaese call new AVRealtime(config) and set it as AVLiveQuery.Channel.");
+
+                 if (AVLiveQuery.Channel.State == AVRealtime.Status.Online)
                  {
-                     this.Id = subcriptionT.Result.Id;
-                     this.QueryId = subcriptionT.Result.QueryId;
-                     if (AVLiveQuery.Channel.State == AVRealtime.Status.Online)
-                     {
-                         return Task.FromResult(0);
-                     }
-                     if (AVLiveQuery.Channel == null) throw new NullReferenceException("before subscribe live query, plaese call new AVRealtime(config) and set it as AVLiveQuery.Channel.");
-                     // open the websocket with LeanCloud Realtime cloud service.
-                     return AVLiveQuery.Channel.OpenAsync();
+                     return Task.FromResult(0);
                  }
+
+                 // open the websocket with LeanCloud Realtime cloud service.
+                 return AVLiveQuery.Channel.OpenAsync(true, null, CancellationToken.None);
 
              }).Unwrap().OnSuccess(openT =>
              {
-                 lock (mutex)
+                 if (Opend) return Task.FromResult(new Tuple<int, IDictionary<string, object>>(0, null));
+                 else
                  {
-                     if (Opend) return Task.FromResult(new Tuple<int, IDictionary<string, object>>(0, null));
-                     AVLiveQuery.Channel.ToggleNotification(true);
-                     var liveQueryLogInCmd = new AVIMCommand().Command("login")
-                              .Argument("installationId", this.Id)
-                              .Argument("service", 1);
-                     // open the session for LiveQuery.
-                     return AVLiveQuery.Channel.AVIMCommandRunner.RunCommandAsync(liveQueryLogInCmd);
+
                  }
+                 AVLiveQuery.Channel.ToggleNotification(true);
+                 var liveQueryLogInCmd = new AVIMCommand().Command("login")
+                          .Argument("installationId", this.Id)
+                          .Argument("service", 1);
+                 // open the session for LiveQuery.
+                 return AVLiveQuery.Channel.AVIMCommandRunner.RunCommandAsync(liveQueryLogInCmd);
+
              }).Unwrap().OnSuccess(runT =>
              {
-                 lock (mutex)
+
+                 if (runT.Result.Item1 > 0)
                  {
-                     if (runT.Result.Item1 > 0)
-                     {
-                         AVRealtime.PrintLog("error on login to LiveQuery");
-                     }
-                     Opend = true;
-                     // set the event hanler when received LiveQuery data pushed.
-                     ToggleNotice(true);
+                     AVRealtime.PrintLog("error on login to LiveQuery");
                  }
+                 Opend = true;
+                 // set the event hanler when received LiveQuery data pushed.
+                 ToggleNotice(true);
              });
         }
         private bool registed;

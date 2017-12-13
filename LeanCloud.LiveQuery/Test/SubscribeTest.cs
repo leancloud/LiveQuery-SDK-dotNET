@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using LeanCloud.Realtime;
 using System.Configuration;
 using System.Diagnostics;
+using LeanCloud.Storage.Internal;
 
 namespace LeanCloud.LiveQuery.UnitTest.NetFx45
 {
