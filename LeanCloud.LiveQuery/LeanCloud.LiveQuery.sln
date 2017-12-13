@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.LiveQuery.Portable", "LeanCloud.LiveQuery.Portable.csproj", "{F3EB1DA8-AFB0-4342-8524-1A9B091EB9C0}"
 EndProject
@@ -9,10 +9,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.LiveQuery.UnitTest.NetFx45", "Test\LeanCloud.LiveQuery.UnitTest.NetFx45.csproj", "{5962C742-05DD-4B25-B29A-F2911F00060F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.LiveQuery.Unity", "LeanCloud.LiveQuery.Unity.csproj", "{B44EA542-C112-421D-8035-1CE1D3CA61CC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.LiveQuery.UnitTest.Mono45", "Test\LeanCloud.LiveQuery.UnitTest.Mono45\LeanCloud.LiveQuery.UnitTest.Mono45.csproj", "{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveQuery.ConsoleApplication.Demo", "..\LiveQuery.ConsoleApplication.Demo\LiveQuery.ConsoleApplication.Demo.csproj", "{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,20 +28,14 @@ Global
 		{B44EA542-C112-421D-8035-1CE1D3CA61CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B44EA542-C112-421D-8035-1CE1D3CA61CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B44EA542-C112-421D-8035-1CE1D3CA61CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6F24271-C7A7-43F6-B8D6-04FB02EDE1E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5962C742-05DD-4B25-B29A-F2911F00060F} = {C48B1D8C-7745-4CAD-80FB-890ECFADA42E}
-		{ED4865AC-9D1F-4D02-8039-12CB5E4F70A9} = {C48B1D8C-7745-4CAD-80FB-890ECFADA42E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E2BE4AC-D374-4334-ACBF-67692CBD39F2}
 	EndGlobalSection
 EndGlobal
