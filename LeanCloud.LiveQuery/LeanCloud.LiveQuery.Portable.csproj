@@ -44,7 +44,7 @@
       <HintPath>packages\LeanCloud.Storage.2017.11.20.1\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Core.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.Realtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\LeanCloud.Realtime.2017.12.13.4\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Realtime.dll</HintPath>
+      <HintPath>packages\LeanCloud.Realtime.2017.12.13.8\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Realtime.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.Storage, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\LeanCloud.Storage.2017.11.20.1\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Storage.dll</HintPath>
