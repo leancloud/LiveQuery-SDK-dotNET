@@ -162,7 +162,6 @@ namespace LeanCloud.LiveQuery
             // get installation id as the LiveQuery subscription id.
             return AVPlugins.Instance.InstallationIdController.GetAsync().OnSuccess(insT =>
              {
-
                  var subscriptionId = insT.Result.ToString();
                  // create LiveQuery subscription with an id.
                  return CreateAsync(this.Query, subscriptionId, sessionToken, cancellationToken);
@@ -176,29 +175,26 @@ namespace LeanCloud.LiveQuery
 
                  if (AVLiveQuery.Channel.State == AVRealtime.Status.Online)
                  {
-                     return Task.FromResult(0);
+                     return Task.FromResult(true);
                  }
-
-                 // open the websocket with LeanCloud Realtime cloud service.
-                 return AVLiveQuery.Channel.OpenAsync(true, null, CancellationToken.None);
-
+                 else
+                 {
+                     // open the websocket with LeanCloud Realtime cloud service.
+                     AVLiveQuery.Channel.ToggleNotification(true);
+                     return AVLiveQuery.Channel.OpenAsync();
+                 }
              }).Unwrap().OnSuccess(openT =>
              {
                  if (Opend) return Task.FromResult(new Tuple<int, IDictionary<string, object>>(0, null));
-                 else
-                 {
-
-                 }
-                 AVLiveQuery.Channel.ToggleNotification(true);
+                
                  var liveQueryLogInCmd = new AVIMCommand().Command("login")
                           .Argument("installationId", this.Id)
-                          .Argument("service", 1);
+                          .Argument("service", 1).AppId(AVClient.CurrentConfiguration.ApplicationId);
                  // open the session for LiveQuery.
                  return AVLiveQuery.Channel.AVIMCommandRunner.RunCommandAsync(liveQueryLogInCmd);
 
              }).Unwrap().OnSuccess(runT =>
              {
-
                  if (runT.Result.Item1 > 0)
                  {
                      AVRealtime.PrintLog("error on login to LiveQuery");
