@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using LeanCloud.Realtime;
 using System.Configuration;
 using System.Diagnostics;
+using LeanCloud.Storage.Internal;
 
 namespace LeanCloud.LiveQuery.UnitTest.NetFx45
 {
@@ -49,12 +50,12 @@ namespace LeanCloud.LiveQuery.UnitTest.NetFx45
                 var livequeryInstance = t.Result;
                 livequeryInstance.OnLiveQueryReceived += LivequeryInstance_OnLiveQueryReceived;
                 return Task.FromResult(0);
-            }).ContinueWith(s =>
+            }).Unwrap().ContinueWith(s =>
             {
                 var testObj = new AVObject("TodoLiveQuery");
                 testObj["name"] = "livequery";
                 return testObj.SaveAsync();
-            }).ContinueWith(z =>
+            }).Unwrap().ContinueWith(z =>
             {
                 return Task.Delay(200000);
             }).Unwrap();
