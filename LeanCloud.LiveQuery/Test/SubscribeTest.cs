@@ -66,5 +66,46 @@ namespace LeanCloud.LiveQuery.UnitTest.NetFx45
             Assert.IsTrue(e.Scope == "create");
             Assert.IsNotNull(e.Payload.ObjectId);
         }
+
+        private readonly object mutex = new object();
+        [Test, Timeout(300000)]
+        public Task TestDelete()
+        {
+            var query = new AVQuery<AVObject>("TodoLiveQuery").WhereEqualTo("name", "livequery");
+            var deleteTick = 0;
+            var leaveTick = 0;
+            return query.SubscribeAsync().ContinueWith(subT =>
+            {
+                var livequery = subT.Result;
+                livequery.OnLiveQueryReceived += (sender, e) =>
+                {
+                    switch (e.Scope)
+                    {
+                        case "create": //符合查询条件的对象创建
+                            break;
+                        case "update": //符合查询条件的对象属性修改
+                            break;
+                        case "enter": //对象被修改后，从不符合查询条件变成符合
+                            break;
+                        case "leave": //对象被修改后，从符合查询条件变成不符合
+                            lock (mutex)
+                            {
+                                leaveTick++;
+                            }
+                            LogText("leave:" + leaveTick);
+                            break;
+                        case "delete": //对象删除
+                            lock (mutex)
+                            {
+                                deleteTick++;
+                            }
+                            LogText("delete:" + deleteTick);
+                            break;
+                    }
+                };
+                return Task.Delay(200000);
+            }).Unwrap();
+        }
+
     }
 }
