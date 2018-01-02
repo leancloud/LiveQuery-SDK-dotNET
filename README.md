@@ -4,6 +4,23 @@
 
 [实时数据同步 LiveQuery 开发指南](https://leancloud.cn/docs/livequery-guide.html)
 
+## 在 Unity 中使用
+
+访问 [Release](https://github.com/leancloud/LiveQuery-SDK-dotNET/releases) 获取最新版本的依赖
+
+解压之后，在 dlls 文件夹下面的如下都需要引入到您的项目中：
+
+```sh
+AssemblyLister.dll
+LeanCloud.Core.dll
+LeanCloud.LiveQuery.dll
+LeanCloud.Realtime.dll
+LeanCloud.Storage.dll
+Unity.Compat.dll
+Unity.Tasks.dll
+websocket-sharp.dll
+```
+
 ## 初始化
 
 ```cs
