@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B44EA542-C112-421D-8035-1CE1D3CA61CC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LeanCloud.LiveQuery</RootNamespace>
+    <AssemblyName>LeanCloud.LiveQuery</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\Unity35\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNITY</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>5</LangVersion>
+    <DocumentationFile>bin\Debug\Unity35\LeanCloud.LiveQuery.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>
+    </DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\Unity35\</OutputPath>
+    <DefineConstants>TRACE;UNITY</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>5</LangVersion>
+    <DocumentationFile>bin\Release\Unity35\LeanCloud.LiveQuery.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AssemblyLister, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Unity35.libs\AssemblyLister.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Unity35.libs\LeanCloud.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.Realtime, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Unity35.libs\LeanCloud.Realtime.dll</HintPath>
+    </Reference>
+    <Reference Include="LeanCloud.Storage, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Unity35.libs\LeanCloud.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Unity.Compat, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Unity35.libs\Unity.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tasks, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Unity35.libs\Unity.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Unity35.libs\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp, Version=1.0.2.37328, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Unity35.libs\websocket-sharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\LeanCloud.LiveQuery\Public\AVLiveQuery.cs">
+      <Link>Public\AVLiveQuery.cs</Link>
+    </Compile>
+    <Compile Include="..\LeanCloud.LiveQuery\Public\AVLiveQueryEventArgs.cs">
+      <Link>Public\AVLiveQueryEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\LeanCloud.LiveQuery\Public\AVLiveQueryExtensions.cs">
+      <Link>Public\AVLiveQueryExtensions.cs</Link>
+    </Compile>
+    <Compile Include="Public\AVLiveQuery.cs" />
+    <Compile Include="Public\AVLiveQueryEventArgs.cs" />
+    <Compile Include="Public\AVLiveQueryExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Unity35.libs\AssemblyLister.dll" />
+    <Content Include="Unity35.libs\LeanCloud.Core.dll" />
+    <Content Include="Unity35.libs\LeanCloud.Realtime.dll" />
+    <Content Include="Unity35.libs\LeanCloud.Storage.dll" />
+    <Content Include="Unity35.libs\Unity.Compat.dll" />
+    <Content Include="Unity35.libs\Unity.Tasks.dll" />
+    <Content Include="Unity35.libs\UnityEngine.dll" />
+    <Content Include="Unity35.libs\websocket-sharp.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
