@@ -1,26 +1,25 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using LeanCloud.Storage.Internal;
-using LeanCloud.Realtime;
-using LeanCloud.Core.Internal;
-using LeanCloud.Realtime.Internal;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-
 
 namespace LeanCloud.LiveQuery
 {
+    /// <summary>
+    /// AVLiveQuery 扩展类
+    /// </summary>
     public static class AVLiveQueryExtensions
     {
-        public static Task<AVLiveQuery<T>> SubscribeAsync<T>(this AVQuery<T> query, string sessionToken = "", CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject
-        {
+        /// <summary>
+        /// AVQuery 订阅 AVLiveQuery 的扩展方法 
+        /// </summary>
+        /// <returns>AVLiveQuery 对象</returns>
+        /// <param name="query">Query.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public static async Task<AVLiveQuery<T>> SubscribeAsync<T>(this AVQuery<T> query, CancellationToken cancellationToken = default(CancellationToken)) where T : AVObject {
             var liveQuery = new AVLiveQuery<T>(query);
-            return liveQuery.SubscribeAsync().OnSuccess(t =>
-            {
-                return liveQuery;
-            });
+            liveQuery = await liveQuery.SubscribeAsync();
+            return liveQuery;
         }
     }
 }
