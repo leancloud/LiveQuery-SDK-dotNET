@@ -177,7 +177,8 @@ namespace LeanCloud.LiveQuery
 
             Dictionary<string, object> data = new Dictionary<string, object> {
                 { "query", queryMap },
-                { "id", AVLiveQuery.InstallationId }
+                { "id", AVLiveQuery.InstallationId },
+                { "clientTs", AVLiveQuery.ClientTs }
             };
             string sessionToken = AVUser.CurrentUser != null ? AVUser.CurrentUser.SessionToken : string.Empty;
             if (!string.IsNullOrEmpty(sessionToken)) {
