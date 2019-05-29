@@ -59,10 +59,10 @@
       <HintPath>packages\Websockets.Pcl.1.1.9\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10\WebSockets.PCL.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.Core">
-      <HintPath>packages\LeanCloud.Storage.2019.4.23.2\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Core.dll</HintPath>
+      <HintPath>packages\LeanCloud.Storage.2019.5.17.1\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Core.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.Storage">
-      <HintPath>packages\LeanCloud.Storage.2019.4.23.2\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Storage.dll</HintPath>
+      <HintPath>packages\LeanCloud.Storage.2019.5.17.1\lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\LeanCloud.Storage.dll</HintPath>
     </Reference>
     <Reference Include="LeanCloud.Realtime">
       <HintPath>LeanCloud.Realtime.dll</HintPath>

@@ -17,8 +17,11 @@ namespace LiveQueryTest {
         }
 
         static async void Test() {
-            string appId = "Eohx7L4EMfe4xmairXeT7q1w-gzGzoHsz";
-            string appKey = "GSBSGpYH9FsRdCss8TGQed0F";
+            //string appId = "Eohx7L4EMfe4xmairXeT7q1w-gzGzoHsz";
+            //string appKey = "GSBSGpYH9FsRdCss8TGQed0F";
+
+            string appId = "FQr8l8LLvdxIwhMHN77sNluX-9Nh9j0Va";
+            string appKey = "MJSm46Uu6LjF5eNmqfbuUmt6";
 
             AVRealtime.WebSocketLog(Console.WriteLine);
             AVClient.HttpLog(Console.WriteLine);
@@ -27,16 +30,14 @@ namespace LiveQueryTest {
             Websockets.Net.WebsocketConnection.Link();
             var realtime = new AVRealtime(new AVRealtime.Configuration { 
                 ApplicationId = appId,
-                ApplicationKey = appKey,
-                RealtimeServer = new Uri("wss://rtm51.leancloud.cn/")
+                ApplicationKey = appKey
             });
             AVLiveQuery.Channel = realtime;
 
-            var query = new AVQuery<AVObject>("GameObject").WhereEqualTo("objectId", "5c7f954912215f00728f10ff");
+            var query = new AVQuery<AVObject>("GameObject").WhereEqualTo("objectId", "5cedee8e58cf480008de9caa");
             //var query = new AVQuery<AVObject>("GameObject").WhereExists("objectId");
             liveQuery = await query.SubscribeAsync();
             liveQuery.OnLiveQueryReceived += OnLiveQueryReceived;
-            await liveQuery.UnsubscribeAsync();
 
             Console.WriteLine("done");
         }
