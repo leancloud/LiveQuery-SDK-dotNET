@@ -130,7 +130,7 @@ namespace LeanCloud.LiveQuery
             AVLiveQuery.InstallationId = installation.ToString();
             AVLiveQuery.Channel.ToggleNotification(true);
             await AVLiveQuery.Channel.OpenAsync();
-            AVLiveQuery.ClientTs = (long) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+            AVLiveQuery.ClientTs = (long) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
             var liveQueryLogInCmd = new AVIMCommand().Command("login")
                      .Argument("installationId", AVLiveQuery.InstallationId)
                      .Argument("clientTs", AVLiveQuery.ClientTs)
