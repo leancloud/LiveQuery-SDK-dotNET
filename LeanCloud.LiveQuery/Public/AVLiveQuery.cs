@@ -117,8 +117,9 @@ namespace LeanCloud.LiveQuery
         static async void OnChannelReconnected(object sender, AVIMReconnectedEventArgs e) {
             await Login();
             lock (liveQueryDict) { 
-                foreach (var kv in liveQueryDict) { 
-                    if (kv.Value.TryGetTarget(out var liveQuery)) {
+                foreach (var kv in liveQueryDict) {
+                    AVLiveQuery<T> liveQuery;
+                    if (kv.Value.TryGetTarget(out liveQuery)) {
                         liveQuery.InternalSubscribe().ContinueWith(_ => { });
                     }
                 }
@@ -146,18 +147,22 @@ namespace LeanCloud.LiveQuery
         static void OnChannelNoticeReceived(object sender, AVIMNotice e) {
             if (e.CommandName == "data") {
                 var ids = AVDecoder.Instance.DecodeList<string>(e.RawData["ids"]);
-                if (e.RawData["msg"] is IEnumerable<object> msg) {
+                if (e.RawData["msg"] is IEnumerable<object>) {
+                    IEnumerable<object> msg = e.RawData["msg"] as IEnumerable<object>;
                     var receivedPayloads = from item in msg
                                            select item as Dictionary<string, object>;
                     if (receivedPayloads != null) {
                         foreach (var payload in receivedPayloads) {
                             var liveQueryId = payload["query_id"] as string;
-                            if (liveQueryDict.TryGetValue(liveQueryId, out var liveQueryRef) &&
-                                liveQueryRef.TryGetTarget(out var liveQuery)) {
+                            WeakReference<AVLiveQuery<T>> liveQueryRef = null;
+                            AVLiveQuery<T> liveQuery = null;
+                            if (liveQueryDict.TryGetValue(liveQueryId, out liveQueryRef) &&
+                                liveQueryRef.TryGetTarget(out liveQuery)) {
                                 var scope = payload["op"] as string;
                                 var objectPayload = payload["object"] as Dictionary<string, object>;
                                 string[] keys = null;
-                                if (payload.TryGetValue("updatedKeys", out object updatedKeys)) {
+                                object updatedKeys = null;
+                                if (payload.TryGetValue("updatedKeys", out updatedKeys)) {
                                     // enter, leave, update
                                     keys = (updatedKeys as List<object>).Select(x => x.ToString()).ToArray();
                                 }
