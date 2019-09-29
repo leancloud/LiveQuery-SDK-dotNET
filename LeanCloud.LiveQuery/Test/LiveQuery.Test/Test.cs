@@ -16,7 +16,7 @@ namespace LiveQuery.Test {
             AVRealtime.WebSocketLog(Console.WriteLine);
             AVClient.HttpLog(Console.WriteLine);
 
-            AVClient.Initialize(appId, appKey);
+            AVClient.Initialize(appId, appKey, "https://avoscloud.com");
             Websockets.Net.WebsocketConnection.Link();
             var realtime = new AVRealtime(new AVRealtime.Configuration {
                 ApplicationId = appId,
