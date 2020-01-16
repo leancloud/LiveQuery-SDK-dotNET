@@ -9,35 +9,35 @@ using LeanCloud.LiveQuery;
 namespace LiveQuery.Test {
     [TestFixture]
     public class Test {
-        string appId = "Eohx7L4EMfe4xmairXeT7q1w-gzGzoHsz";
-        string appKey = "GSBSGpYH9FsRdCss8TGQed0F";
+        readonly string AppId = "BMYV4RKSTwo8WSqt8q9ezcWF-gzGzoHsz";
+        readonly string AppKey = "pbf6Nk5seyjilexdpyrPwjSp";
+        readonly string Server = "https://bmyv4rks.lc-cn-n1-shared.com";
 
-        void Init() {
+        [SetUp]
+        public void SetUp() {
             AVRealtime.WebSocketLog(Console.WriteLine);
             AVClient.HttpLog(Console.WriteLine);
 
-            AVClient.Initialize(appId, appKey, "https://avoscloud.com");
+            AVClient.Initialize(AppId, AppKey, Server);
             Websockets.Net.WebsocketConnection.Link();
             var realtime = new AVRealtime(new AVRealtime.Configuration {
-                ApplicationId = appId,
-                ApplicationKey = appKey
+                ApplicationId = AppId,
+                ApplicationKey = AppKey
             });
             AVLiveQuery.Channel = realtime;
         }
 
         [Test]
         public async Task Create() {
-            Init();
-
             var f = false;
-            var query = new AVQuery<AVObject>("GameObject").WhereExists("objectId");
+            var query = new AVQuery<AVObject>("Account").WhereExists("objectId");
             var liveQuery = await query.SubscribeAsync();
             liveQuery.OnLiveQueryReceived += (sender, e) => {
                 Console.WriteLine(e.Scope);
                 f = true;
             };
 
-            var go = new AVObject("GameObject");
+            var go = new AVObject("Account");
             await go.SaveAsync();
             Console.WriteLine(go.ObjectId);
 
@@ -50,10 +50,8 @@ namespace LiveQuery.Test {
 
         [Test]
         public async Task Enter() {
-            Init();
-
             var f = false;
-            var query = new AVQuery<AVObject>("GameObject").WhereContains("name", "x");
+            var query = new AVQuery<AVObject>("Account").WhereContains("name", "x");
             var liveQuery = await query.SubscribeAsync();
             liveQuery.OnLiveQueryReceived += (sender, e) => {
                 Console.WriteLine(e.Scope);
@@ -61,8 +59,8 @@ namespace LiveQuery.Test {
                 f = true;
             };
 
-            var q = AVObject.GetQuery("GameObject");
-            var go = await q.GetAsync("5cd3e68830863b00701e2876");
+            var q = AVObject.GetQuery("Account");
+            var go = await q.GetAsync("5df7268cd4b56c00748e91af");
             go["name"] = "xxx";
             await go.SaveAsync();
             Console.WriteLine(go.ObjectId);
@@ -78,10 +76,8 @@ namespace LiveQuery.Test {
 
         [Test]
         public async Task Leave() {
-            Init();
-
             var f = false;
-            var query = new AVQuery<AVObject>("GameObject").WhereContains("name", "s");
+            var query = new AVQuery<AVObject>("Account").WhereContains("name", "s");
             var liveQuery = await query.SubscribeAsync();
             liveQuery.OnLiveQueryReceived += (sender, e) => {
                 Console.WriteLine(e.Scope);
@@ -89,8 +85,8 @@ namespace LiveQuery.Test {
                 f = true;
             };
 
-            var q = AVObject.GetQuery("GameObject");
-            var go = await q.GetAsync("5cd3e75fc8959c006843886a");
+            var q = AVObject.GetQuery("Account");
+            var go = await q.GetAsync("5df0b08f5620710073a95ccd");
             go["name"] = "aaa";
             await go.SaveAsync();
             Console.WriteLine(go.ObjectId);
@@ -107,10 +103,9 @@ namespace LiveQuery.Test {
 
         [Test]
         public async Task Update() {
-            Init();
-
             var f = false;
-            var query = new AVQuery<AVObject>("GameObject").WhereEqualTo("objectId", "5cdcd79bc8959c0068de3df2");
+            var query = new AVQuery<AVObject>("Account");
+            query = query.WhereLessThan("createdAt", DateTime.Now);
             var liveQuery = await query.SubscribeAsync();
             liveQuery.OnLiveQueryReceived += (sender, e) => {
                 Console.WriteLine(e.Scope);
@@ -135,13 +130,11 @@ namespace LiveQuery.Test {
 
         [Test]
         public async Task Delete() {
-            Init();
-
             var f = false;
-            var go = new AVObject("GameObject");
+            var go = new AVObject("Todo");
             await go.SaveAsync();
             var objectId = go.ObjectId;
-            var query = new AVQuery<AVObject>("GameObject").WhereEqualTo("objectId", objectId);
+            var query = new AVQuery<AVObject>("Todo").WhereEqualTo("objectId", objectId);
             var liveQuery = await query.SubscribeAsync();
             liveQuery.OnLiveQueryReceived += (sender, e) => {
                 Console.WriteLine(e.Scope);

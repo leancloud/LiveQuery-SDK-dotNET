@@ -192,7 +192,7 @@ namespace LeanCloud.LiveQuery
             var command = new AVCommand("LiveQuery/subscribe",
                                         "POST",
                                         sessionToken,
-                                        data: data);
+                                        data: PointerOrLocalIdEncoder.Instance.Encode(data) as IDictionary<string, object>);
             var res = await AVPlugins.Instance.CommandRunner.RunCommandAsync(command);
             Id = res.Item2["query_id"] as string;
         }
