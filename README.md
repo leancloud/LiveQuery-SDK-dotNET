@@ -1,5 +1,9 @@
 # LeanCloud LiveQuery for C#
 
+## Deprecation Announcement
+
+This project is deprecated, please refer to [Standard SDK](https://github.com/leancloud/csharp-sdk) for the latest updates.
+
 ## 官方文档
 
 [实时数据同步 LiveQuery 开发指南](https://leancloud.cn/docs/livequery-guide.html)
